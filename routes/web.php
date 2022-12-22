@@ -24,6 +24,8 @@ Route::get("/books/{id}/show", [HomeController::class, "show"])->name("book.show
 Route::get("/books/{id}/edit", [HomeController::class, "edit"])->name("book.edit");
 Route::get("/books/create", [HomeController::class, "create"])->name("book.create");
 Route::post("/books/store", [HomeController::class, "store"])->name("book.store");
+Route::post("/books/{id}/update", [HomeController::class, "update"])->name("book.update");
+Route::get("/books/{id}/destroy", [HomeController::class, "destroy"])->name("book.destroy");
 
 // Routes Author
 
@@ -35,5 +37,9 @@ Route::get("/authors/create", [AuthorController::class, "createAuthor"])->name("
 // Routes Category
 
 Route::get("/categories", [CategoryController::class, "index"])->name("category.index");
-Route::get("/categories/{id}", [CategoryController::class, "showCategory"])->name("category.show");
-Route::get("/categories/create", [CategoryController::class, "createCategory"])->name("category.create");
+Route::get("/categories/create", [CategoryController::class, "create"])->name("category.create");
+Route::post("/categories/store", [CategoryController::class, "store"])->name("category.store");
+Route::get("/categories/{id}/edit", [CategoryController::class, "edit"])->name("category.edit");
+Route::post("/categories/{id}/update", [CategoryController::class, "update"])->name("category.update");
+Route::get("/categories/{id}/show", [CategoryController::class, "show"])->name("category.show");
+Route::get("/categories/{id}/destroy", [CategoryController::class, "destroy"])->name("category.destroy");

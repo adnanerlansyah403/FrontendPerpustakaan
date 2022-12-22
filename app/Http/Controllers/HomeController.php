@@ -21,7 +21,6 @@ class HomeController extends Controller
         // dd($book[0]);
 
         return view("layout.home", compact("book"));
-
     }
 
     public function show($id)
@@ -29,7 +28,7 @@ class HomeController extends Controller
 
         $responseBook = HttpClient::fetch(
             "GET",
-            "http://localhost:8001/api/books/".$id."/show"
+            "http://localhost:8001/api/books/" . $id . "/show"
         );
 
         $book = $responseBook["data"]['book'];
@@ -37,7 +36,6 @@ class HomeController extends Controller
         // dd($book['author']['name']);
 
         return view("book.show", compact("book"));
-
     }
 
     public function edit($id)
@@ -45,16 +43,29 @@ class HomeController extends Controller
 
         $responseBook = HttpClient::fetch(
             "GET",
-            "http://localhost:8001/api/books/".$id."/edit"
+            "http://localhost:8001/api/books/" . $id . "/show"
         );
 
         $book = $responseBook["data"]['book'];
 
         return view("book.edit", compact("book"));
-
     }
 
-    public function create() 
+    public function update(Request $request, $id)
+    {
+        $responseBook = HttpClient::fetch(
+            "POST",
+            "http://localhost:8001/api/books/" . $id . "/update",
+            $request->all(),
+            $request->file()
+        );
+
+        $book = $responseBook["data"]['book'];
+
+        return view("book.edit", compact("book"));
+    }
+
+    public function create()
     {
         return view("book.create");
     }
@@ -64,13 +75,23 @@ class HomeController extends Controller
         $responseBook = HttpClient::fetch(
             "POST",
             "http://localhost:8001/api/books/store",
-            $request->all()
+            $request->all(),
+            $request->file()
         );
 
         // dd($responseBook);
 
         return redirect()->route("homepage");
-
     }
 
+    public function destroy($id)
+    {
+
+        $responseBook = HttpClient::fetch(
+            "POST",
+            "http://localhost:8001/api/books/" . $id . "/destroy"
+        );
+
+        return redirect()->route("homepage");
+    }
 }

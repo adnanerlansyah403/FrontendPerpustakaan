@@ -59,7 +59,7 @@
                     <a href="/">Author</a>
                 </li>
                 <li>
-                    <a href="/">Category</a>
+                    <a href="{{ route("category.index") }}">Category</a>
                 </li>
             </ul>
         </nav>

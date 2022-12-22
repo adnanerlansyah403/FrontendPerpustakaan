@@ -48,11 +48,8 @@
                     {{ $p["book"]["originalData"]["age_rating"] ? $p["book"]["originalData"]["age_rating"] : "Tidak ada data" }}
                 </td>
                 <td>
-                    <a href="">
+                    <a href="{{ route("book.destroy", $p["book"]["originalData"]["id"]) }}">
                         Delete
-                    </a>
-                    <a href="">
-                        Edit
                     </a>
                     <a href="{{ route("book.show", $p["book"]["originalData"]["id"]) }}">
                         Show
