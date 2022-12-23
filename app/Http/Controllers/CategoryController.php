@@ -57,9 +57,13 @@ class CategoryController extends Controller
             $request->all()
         );
 
+        if (isset($responseBook["errors"])) {
+            return redirect()->route('category.edit', $id)->withErrors($responseCategory['errors']);
+        }
+
         $category = $responseCategory["data"];
 
-        return redirect()->back();
+        return redirect()->route('category.index');
     }
 
     public function create()
@@ -76,9 +80,9 @@ class CategoryController extends Controller
             $request->all()
         );
 
-        // dd($responseCategory);
-
-        // $categories = $responseCategory["data"];
+        if (isset($responseBook["errors"])) {
+            return redirect()->route('category.create')->withErrors($responseCategory['errors']);
+        }
 
         return redirect()->route("category.index");
     }

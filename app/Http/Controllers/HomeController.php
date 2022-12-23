@@ -33,7 +33,7 @@ class HomeController extends Controller
 
         $book = $responseBook["data"]['book'];
 
-        // dd($book['author']['name']);
+        // dd($book['author']);
 
         return view("book.show", compact("book"));
     }
@@ -43,7 +43,7 @@ class HomeController extends Controller
 
         $responseBook = HttpClient::fetch(
             "GET",
-            "http://localhost:8001/api/books/" . $id . "/show"
+            "http://localhost:8001/api/books/" . $id . "/edit"
         );
 
         $book = $responseBook["data"]['book'];
@@ -60,14 +60,28 @@ class HomeController extends Controller
             $request->file()
         );
 
-        $book = $responseBook["data"]['book'];
+        // dd($responseBook);
 
-        return view("book.edit", compact("book"));
+        if (isset($responseBook["errors"])) {
+            // dd("test");
+            return redirect()->route('book.edit', $id)->withErrors($responseBook['errors']);
+        }
+
+        return redirect()->route('book.show', $id);
     }
 
     public function create()
     {
-        return view("book.create");
+
+        $responseCategory = HttpClient::fetch(
+            "GET",
+            "http://localhost:8001/api/categories"
+        );
+
+        $categories = $responseCategory["data"];
+        // dd($categories);
+
+        return view("book.create", compact("categories"));
     }
 
     public function store(Request $request)
@@ -79,7 +93,11 @@ class HomeController extends Controller
             $request->file()
         );
 
-        // dd($responseBook);
+
+        if (isset($responseBook["errors"])) {
+            // dd("test");
+            return redirect()->route("book.create")->withErrors($responseBook['errors']);
+        }
 
         return redirect()->route("homepage");
     }
@@ -91,6 +109,8 @@ class HomeController extends Controller
             "POST",
             "http://localhost:8001/api/books/" . $id . "/destroy"
         );
+
+        // dd($responseBook);
 
         return redirect()->route("homepage");
     }

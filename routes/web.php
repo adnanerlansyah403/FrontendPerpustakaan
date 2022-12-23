@@ -23,9 +23,9 @@ Route::get('/', [HomeController::class, "index"])->name("homepage");
 Route::get("/books/{id}/show", [HomeController::class, "show"])->name("book.show");
 Route::get("/books/{id}/edit", [HomeController::class, "edit"])->name("book.edit");
 Route::get("/books/create", [HomeController::class, "create"])->name("book.create");
+Route::get("/books/{id}/destroy", [HomeController::class, "destroy"])->name("book.destroy");
 Route::post("/books/store", [HomeController::class, "store"])->name("book.store");
 Route::post("/books/{id}/update", [HomeController::class, "update"])->name("book.update");
-Route::get("/books/{id}/destroy", [HomeController::class, "destroy"])->name("book.destroy");
 
 // Routes Author
 

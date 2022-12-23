@@ -11,23 +11,31 @@
     <h1>Judul Buku: {{ $book["originalData"]["title"] }}</h1>
 <details>
     <br>
-    <div style="display: flex; align-items: center; gap: 5px;">
+    <div>
         @if($book["author"] != null)
             <b>Di buat oleh: 
+            </b>
                 <span>
                     {{ $book["author"]["name"] }} 
                 </span>
-            </b>
         @endif
         @if ( $book["category"] != null )
+        <br><b>
+                Kategori:
+            </b>
             <span>
-                Kategori: {{ $book["category"]["name"] }}
+                {{ $book["category"]["name"] }}
             </span>
         @endif
     </div><br>
     <ul>
         <li>
             <h2>Data Buku : </h2>
+        </li>
+        <li>
+            @if ($book["originalData"]["cover"])
+                <img src="{{ $book["originalData"]["cover_path"] }}" alt="" width="200" height="200">
+            @endif
         </li>
         <li>
             <b>Description: </b>
@@ -60,6 +68,11 @@
             <li>
                 <h2>Data Author : </h2>
             </li>
+            @if ($book["author"]["photo"])
+                <li>
+                    <img src="{{ $book["author"]["photo"] }}" alt="" width="200" height="200">
+                </li>
+            @endif
             <li>
                 <b>Nama: </b>
                 <span>

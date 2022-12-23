@@ -39,7 +39,11 @@
                     {{ $p["book"]["originalData"]["size_of_book"] ? $p["book"]["originalData"]["size_of_book"] : "Tidak ada data" }}
                 </td>
                 <td>
-                    {{ $p["book"]["originalData"]["cover"] ? $p["book"]["originalData"]["cover"] : "Tidak ada data" }}
+                    @if ($p["book"]["originalData"]["cover_path"])
+                        <img src="{{ $p["book"]["originalData"]["cover_path"] }}" alt="gambarcover" width="100" height="100">
+                    @else
+                        Tidak ada cover
+                    @endif
                 </td>
                 <td>
                     {{ $p["book"]["originalData"]["rising_city"] ? $p["book"]["originalData"]["rising_city"] : "Tidak ada data" }}

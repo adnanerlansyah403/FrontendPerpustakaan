@@ -7,13 +7,18 @@
 <br><br>
 <a href="{{ route("category.index") }}">Kembali</a>
 
-@if ($errors->any())
+@if($errors->any())
 <br>
-    @foreach ($errors as $error)
-        <p>
+<div class="bg-red-500 text-white font-bold rounded-t py-2 px-4">
+    Something went wrong...
+</div><br>
+<ul class="border border-t-0 border-red-400 rounded-b px-4 py-3 text-red-700">
+    @foreach($errors->all() as $error)
+        <li>
             {{ $error }}
-        </p>
+        </li>
     @endforeach
+</ul>
 @endif
 
 <form action="{{ route("category.update", $category["id"]) }}" method="POST">

@@ -7,15 +7,20 @@
 <br><br>
 <a href="{{ route("homepage") }}">Kembali</a>
 
-<h1>Buat Buku</h1>
+<h1>Edit Buku</h1>
 
-@if ($errors->any())
+@if($errors->any())
 <br>
-    @foreach ($errors as $error)
-        <p>
+<div class="bg-red-500 text-white font-bold rounded-t py-2 px-4">
+    Something went wrong...
+</div><br>
+<ul class="border border-t-0 border-red-400 rounded-b px-4 py-3 text-red-700">
+    @foreach($errors->all() as $error)
+        <li>
             {{ $error }}
-        </p>
+        </li>
     @endforeach
+</ul>
 @endif
 
 
@@ -35,29 +40,24 @@
     <label for="cover">Cover</label>
     <input type="file" name="cover" placeholder="Cover buku..." ><br><br>
     <label for="description">Deskripsi</label><br>
-    <textarea name="description" id="" cols="30" rows="10">{{ $book["originalData"]["description"] }}</textarea><br>
+    <textarea name="description" id="" cols="30" rows="10">{{ $book["originalData"]["description"] }}</textarea><br><br>
     <label for="category_id">Category</label>
     <select name="category_id" id="category_id">
-        <option value="1">Drama</option>
+        @forelse ($book["categories"] as $category)
+            <option value="{{ $category["id"] }}" {{ $category["id"] == $book["originalData"]["category_id"] ? "selected" : "" }}>{{ $category["name"] }}</option>    
+        @empty
+            <option value="">Belum ada kategori</option>
+        @endforelse
+    </select><br><br>
+    <label for="category_id">Author</label>
+    <select name="category_id" id="category_id">
+        @forelse ($book["authors"] as $author)
+            <option value="{{ $author["id"] }}" {{ $author["id"] == $book["originalData"]["author_id"] ? "selected" : "" }}>{{ $author["name"] }}</option>    
+        @empty
+            <option value="">Belum ada author</option>
+        @endforelse 
     </select><br>
     <br><br>
-
-    <h3>Isi data form author</h3>
-    <label for="name">Judul</label>
-    <input type="text" name="name" placeholder="Nama Author..." value="{{ $book["author"]["name"] }}"><br>
-    <label for="email">Email</label>
-    <input type="email" name="email" placeholder="Email Author..." value="{{ $book["author"]["email"] }}"><br>
-    <label for="gender">Gender</label>
-    <select name="gender" id="gender">
-        <option value="L">Laki-Laki</option>
-        <option value="P">Perempuan</option>
-    </select><br>
-    <label for="birthdate">Tanggal Lahir</label>
-    <input type="date" name="birthdate" placeholder="Tanggal Lahir..." value="{{ $book["author"]["birthdate"] }}"><br><br>
-    <label for="photo">Foto Profile</label>
-    <input type="file" name="photo" placeholder="Foto Penulis..."><br><br>
-    <label for="bio">Bio</label><br>
-    <textarea name="bio" id="" cols="30" rows="10">{{ $book["author"]["bio"] }}</textarea><br><br>
 
     <button type="submit">Perbarui Buku</button>
 

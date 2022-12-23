@@ -47,6 +47,10 @@
             margin-bottom: 1rem;
         }
 
+        table thead, tbody ,td {
+            padding: 10px;
+        }
+
     </style>
     <body>
 
@@ -54,9 +58,6 @@
             <ul style="display: flex; align-items: center; gap: 10px;">
                 <li>
                     <a href="/">Home</a>
-                </li>
-                <li>
-                    <a href="/">Author</a>
                 </li>
                 <li>
                     <a href="{{ route("category.index") }}">Category</a>

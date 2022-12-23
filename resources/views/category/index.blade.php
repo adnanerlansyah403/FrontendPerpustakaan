@@ -23,11 +23,11 @@
                     {{ $c["name"] }}
                 </td>
                 <td>
+                    <a href="{{ route("category.edit", $c["id"]) }}">
+                        Edit
+                    </a>
                     <a href="{{ route("category.destroy", $c["id"]) }}">
                         Delete
-                    </a>
-                    <a href="{{ route("category.show", $c["id"]) }}">
-                        Show
                     </a>
                 </td>
             </tr>
